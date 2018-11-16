@@ -1,0 +1,174 @@
+<form class="example-container" [formGroup]="options" [style.fontSize.px]="getFontSize()">
+
+    <mat-toolbar color="primary">
+        <span>ABC COMPANY</span>
+      
+        <!-- This fills the remaining space of the current row -->
+        <span class="example-fill-remaining-space"></span>
+      
+        <span>SOFTWARE DEVELOPMENT</span>
+      </mat-toolbar>
+
+  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Item 1</button>
+  <button mat-menu-item>Item 2</button>
+</mat-menu>
+
+
+<button mat-button [matMenuTriggerFor]="animals">Animal index</button>
+
+<mat-menu #animals="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="vertebrates">Vertebrates</button>
+  <button mat-menu-item [matMenuTriggerFor]="invertebrates">Invertebrates</button>
+</mat-menu>
+
+<mat-menu #vertebrates="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="fish">Fishes</button>
+  <button mat-menu-item [matMenuTriggerFor]="amphibians">Amphibians</button>
+  <button mat-menu-item [matMenuTriggerFor]="reptiles">Reptiles</button>
+  <button mat-menu-item>Birds</button>
+  <button mat-menu-item>Mammals</button>
+</mat-menu>
+
+<mat-menu #invertebrates="matMenu">
+  <button mat-menu-item>Insects</button>
+  <button mat-menu-item>Molluscs</button>
+  <button mat-menu-item>Crustaceans</button>
+  <button mat-menu-item>Corals</button>
+  <button mat-menu-item>Arachnids</button>
+  <button mat-menu-item>Velvet worms</button>
+  <button mat-menu-item>Horseshoe crabs</button>
+</mat-menu>
+
+<mat-menu #fish="matMenu">
+  <button mat-menu-item>Baikal oilfish</button>
+  <button mat-menu-item>Bala shark</button>
+  <button mat-menu-item>Ballan wrasse</button>
+  <button mat-menu-item>Bamboo shark</button>
+  <button mat-menu-item>Banded killifish</button>
+</mat-menu>
+
+<mat-menu #amphibians="matMenu">
+  <button mat-menu-item>Sonoran desert toad</button>
+  <button mat-menu-item>Western toad</button>
+  <button mat-menu-item>Arroyo toad</button>
+  <button mat-menu-item>Yosemite toad</button>
+</mat-menu>
+
+<mat-menu #reptiles="matMenu">
+  <button mat-menu-item>Banded Day Gecko</button>
+  <button mat-menu-item>Banded Gila Monster</button>
+  <button mat-menu-item>Black Tree Monitor</button>
+  <button mat-menu-item>Blue Spiny Lizard</button>
+  <button mat-menu-item disabled>Velociraptor</button>
+</mat-menu>
+
+
+
+
+
+
+
+
+  
+  <mat-form-field [color]="options.value.color">
+    <mat-select placeholder="Color" formControlName="color">
+      <mat-option value="primary">Primary</mat-option>
+      <mat-option value="accent">Accent</mat-option>
+      <mat-option value="warn">Warn</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field [color]="options.value.color">
+    <input matInput type="number" placeholder="Font size (px)" formControlName="fontSize" min="10">
+    <mat-error *ngIf="options.get('fontSize')?.invalid">Min size: 10px</mat-error>
+  </mat-form-field>
+
+
+  
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Favorite food" value="Sushi">
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Leave a comment"></textarea>
+    </mat-form-field>
+  
+ 
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" [formControl]="emailFormControl"
+               [errorStateMatcher]="matcher">
+        <mat-hint>Errors appear instantly!</mat-hint>
+        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+        <br/>
+      <mat-radio-group>
+        <mat-radio-button value="1">Option 1</mat-radio-button>
+        <mat-radio-button value="2">Option 2</mat-radio-button>
+      </mat-radio-group>
+      <br/>
+      <mat-slider
+  thumbLabel
+  [displayWith]="formatLabel"
+  tickInterval="1000"
+  min="1"
+  max="100000"></mat-slider>
+
+  <mat-slide-toggle>Slide me!</mat-slide-toggle>
+
+
+  <mat-sidenav-container class="example-container" *ngIf="shouldRun">
+    <mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>
+    <mat-sidenav-content>Main content</mat-sidenav-content>
+  </mat-sidenav-container>
+  
+  <div *ngIf="!shouldRun">Please open on Stackblitz to see result</div>
+  
+  
+  <mat-drawer-container class="example-container1">
+    <mat-drawer mode="side" opened>Drawer content</mat-drawer>
+    <mat-drawer-content>Main content</mat-drawer-content>
+  </mat-drawer-container>
+  
+
+  <mat-card>Simple card
+  <mat-card-subtitle>Subtitle</mat-card-subtitle>
+</mat-card>
+
+<mat-list>
+    <mat-list-item>Item 1</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Item 2</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>Item 3</mat-list-item>
+  </mat-list>
+
+  <mat-list>
+      <h3 mat-subheader>Folders</h3>
+      <mat-list-item *ngFor="let folder of folders; last as last">
+         <mat-icon mat-list-icon>folder</mat-icon>
+         <h4 mat-line>{{folder.name}}</h4>
+         <p mat-line class="demo-2"> {{folder.updated}} </p>
+         <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>Notes</h3>
+      <mat-list-item *ngFor="let note of notes">
+         <mat-icon mat-list-icon>note</mat-icon>
+         <h4 mat-line>{{note.name}}</h4>
+         <p mat-line class="demo-2"> {{note.updated}} </p>
+      </mat-list-item>
+   </mat-list> 
+
+
+   
+    
+
+
+</form>

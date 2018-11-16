@@ -1,0 +1,144 @@
+<mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal data
+        </mat-panel-title>
+        <mat-panel-description>
+          Type your name and age
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <mat-form-field>
+        <input matInput placeholder="First name">
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput placeholder="Age">
+      </mat-form-field>
+    </mat-expansion-panel>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Self aware panel
+        </mat-panel-title>
+        <mat-panel-description>
+          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <p>I'm visible because I am open</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+  
+  <mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          This is the expansion title
+        </mat-expansion-panel-header>
+      
+        <p>This is the primary content of the panel.</p>
+      
+        <mat-action-row>
+          <button mat-button>Click me</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+  
+  
+  </mat-accordion>
+  
+  <mat-accordion>
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            This is the expansion title
+          </mat-expansion-panel-header>
+        
+          <ng-template matExpansionPanelContent>
+            Some deferred content
+          </ng-template>
+        </mat-expansion-panel>
+  </mat-accordion>
+  
+
+  <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile>1</mat-grid-tile>
+      <mat-grid-tile>2</mat-grid-tile>
+      <mat-grid-tile>3</mat-grid-tile>
+      <mat-grid-tile>4</mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-list role="list">
+        <mat-list-item role="listitem">Item 1</mat-list-item>
+        <mat-list-item role="listitem">Item 2</mat-list-item>
+        <mat-list-item role="listitem">Item 3</mat-list-item>
+      </mat-list>
+
+      <mat-selection-list #shoes>
+          <mat-list-option *ngFor="let shoe of typesOfShoes">
+            {{shoe}}
+          </mat-list-option>
+        </mat-selection-list>
+        
+        <p>
+          Options selected: {{shoes.selectedOptions.selected.length}}
+        </p>
+        
+        
+
+        <mat-list>
+            <h3 mat-subheader>Folders</h3>
+            <mat-list-item *ngFor="let folder of folders">
+              <mat-icon mat-list-icon>folder</mat-icon>
+              <h4 mat-line>{{folder.name}}</h4>
+              <p mat-line> {{folder.updated | date}} </p>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <h3 mat-subheader>Notes</h3>
+            <mat-list-item *ngFor="let note of notes">
+              <mat-icon mat-list-icon>note</mat-icon>
+              <h4 mat-line>{{note.name}}</h4>
+              <p mat-line> {{note.updated | date}} </p>
+            </mat-list-item>
+          </mat-list>
+
+          
+
+
+
+          <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+              {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+            </button>
+            <mat-horizontal-stepper [linear]="isLinear" #stepper>
+              <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+                  <ng-template matStepLabel>Fill out your name</ng-template>
+                  <mat-form-field>
+                    <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup">
+                <form [formGroup]="secondFormGroup">
+                  <ng-template matStepLabel>Fill out your address</ng-template>
+                  <mat-form-field>
+                    <input matInput placeholder="Address" formControlName="secondCtrl" required>
+                  </mat-form-field>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step>
+                <ng-template matStepLabel>Done</ng-template>
+                You are now done.
+                <div>
+                  <button mat-button matStepperPrevious>Back</button>
+                  <button mat-button (click)="stepper.reset()">Reset</button>
+                </div>
+              </mat-step>
+            </mat-horizontal-stepper>
+            
